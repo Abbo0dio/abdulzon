@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "seed": "node seed.js"
+    "seed": "node seed.js",
+    "ensure-admin": "node src/seed/ensureAdmin.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",

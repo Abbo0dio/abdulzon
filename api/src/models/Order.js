@@ -23,7 +23,12 @@ const orderSchema = new mongoose.Schema(
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     items: { type: [orderItemSchema], required: true },
     customer: { type: customerSchema, required: true },
-    subtotal: { type: Number, required: true, min: 0 }
+    subtotal: { type: Number, required: true, min: 0 },
+    orderStatus: {
+      type: String,
+      enum: ['placed', 'processing', 'shipped', 'delivered', 'cancelled'],
+      default: 'placed'
+    }
   },
   { timestamps: { createdAt: true, updatedAt: false } }
 );

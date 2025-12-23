@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext.jsx';
 
 const Header = () => {
   const { cartCount } = useCart();
-  const { user, logout, likes } = useAuth();
+  const { user, logout, likes, isAdmin } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -31,6 +31,11 @@ const Header = () => {
           <NavLink to="/checkout" className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}>
             Checkout
           </NavLink>
+          {isAdmin && (
+            <NavLink to="/admin" className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}>
+              Admin
+            </NavLink>
+          )}
           {user ? (
             <>
               <span className="nav-user">Hi, {user.name.split(' ')[0]}</span>

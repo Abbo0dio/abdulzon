@@ -6,6 +6,7 @@ const sanitizeUser = (user) => ({
   id: user._id,
   name: user.name,
   email: user.email,
+  role: user.role,
   likes: user.likes,
   cartItemCount: user.cart?.items?.reduce((sum, item) => sum + item.quantity, 0) || 0
 });

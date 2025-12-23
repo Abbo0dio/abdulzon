@@ -107,6 +107,7 @@ export const AuthProvider = ({ children }) => {
 
   const value = {
     user,
+    isAdmin: user?.role === 'admin',
     likes,
     loading,
     error,

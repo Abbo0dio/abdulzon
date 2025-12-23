@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt';
 import Product from './src/models/Product.js';
 import User from './src/models/User.js';
 import { connectDB } from './src/config/db.js';
+import { ensureAdminExists } from './src/seed/ensureAdmin.js';
 
 dotenv.config();
 
@@ -108,7 +109,8 @@ const seedProducts = async () => {
         items: createdProducts.map((product) => ({ product: product._id, quantity: 1 }))
       }
     });
-    console.log('Seed data inserted');
+    await ensureAdminExists();
+    console.log('Seed data inserted (products + demo user + admin)');
   } catch (error) {
     console.error('Seed failed', error.message);
   } finally {

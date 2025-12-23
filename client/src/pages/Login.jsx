@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 
 const Login = () => {
   const { login, error, setError } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [form, setForm] = useState({ email: '', password: '' });
   const [status, setStatus] = useState({ loading: false });
 
@@ -17,8 +18,10 @@ const Login = () => {
     event.preventDefault();
     setStatus({ loading: true });
     try {
-      await login(form);
-      navigate('/');
+      const loggedIn = await login(form);
+      const fallback = loggedIn.role === 'admin' ? '/admin' : '/';
+      const nextPath = location.state?.from?.pathname || fallback;
+      navigate(nextPath);
     } catch (_err) {
       setStatus({ loading: false });
     }
